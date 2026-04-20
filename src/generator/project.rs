@@ -134,27 +134,22 @@ impl Generator for ProjectScaffolder {
                 let path = entry.path();
 
                 if path.is_file() {
-                    // 1. Get the path relative to 'features/predefined'
+        
                     let relative = path.strip_prefix(&predefined_root).unwrap();
-
-                    // 2. Build the template key for Tera (e.g., "features/predefined/auth/model.dart.tera")
                     let template_key = format!(
                         "{}/{}",
                         templates::PREDEFINED_FEATURES_DIR,
                         relative.display()
                     );
 
-                    // 3. Prepare output path: strip '.tera' and prefix with 'features/'
                     let mut output_path = relative.to_path_buf();
-                    output_path.set_extension(""); // Removes .tera
+                    output_path.set_extension(""); 
                     let final_output = format!("features/{}", output_path.display());
 
-                    // 4. Render with injected variables
                     let content = engine.render(&template_key, |ctx| {
                         ctx.insert("project_name", &context.project_name);
                     })?;
 
-                    // 5. Create the file in lib/features/...
                     FSAction::create_file(&final_output, Some(&content)).execute(&lib_path)?;
                 }
             }
@@ -168,7 +163,11 @@ impl Generator for ProjectScaffolder {
                 &["pub", "add", "go_router", "get_it"],
                 executer_config,
             )?;
-            inject_git_dependency(&context.base_path)?;
+            inject_git_dependency(
+                &context.base_path,
+                "zren",
+                "https://github.com/Saugat913/zren.git",
+            )?;
 
             let mut executer_config = ExecuterConfig::default();
             executer_config.base_path = context.base_path.clone();

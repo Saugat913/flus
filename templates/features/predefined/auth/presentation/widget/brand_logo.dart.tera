@@ -7,11 +7,9 @@ import 'package:{{project_name}}/core/theme/dimension.dart';
 class BrandLogo extends StatelessWidget {
   const BrandLogo({
     super.key,
-    this.icon = Icons.flutter_dash,
     this.size = 48,
   });
 
-  final IconData icon;
   final double size;
 
   @override
@@ -26,7 +24,7 @@ class BrandLogo extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: Icon(
-            icon,
+            Icons.flutter_dash,
             size: size,
             color: context.colors.brandColor,
           ),

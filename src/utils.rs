@@ -1,3 +1,5 @@
+use anyhow::Context;
+
 use crate::{app_error, error::Result};
 use std::{
     env,
@@ -42,7 +44,11 @@ pub fn execute_command(command: &str, args: &[&str], config: ExecuterConfig) -> 
         .output();
     match output {
         Err(e) => {
-            return Err(app_error!("While executing command {}: {}", command, e.to_string()));
+            return Err(app_error!(
+                "While executing command {}: {}",
+                command,
+                e.to_string()
+            ));
         }
         Ok(output) => {
             if !output.status.success() {
@@ -163,23 +169,40 @@ impl FSAction {
 }
 
 
+pub fn inject_git_dependency(
+    base_path: &std::path::Path,
+    package_name: &str,
+    git_url: &str,
+) -> anyhow::Result<()> {
+    anyhow::ensure!(!package_name.is_empty(), "package_name must not be empty");
+    anyhow::ensure!(!git_url.is_empty(), "git_url must not be empty");
 
-pub fn inject_git_dependency(base_path: &std::path::Path) -> anyhow::Result<()> {
     let pubspec_path = base_path.join("pubspec.yaml");
-    let content = fs::read_to_string(&pubspec_path)?;
+    let content = fs::read_to_string(&pubspec_path)
+        .with_context(|| format!("Failed to read {:?}", pubspec_path))?;
 
-    let git_dep = r#"
-  zren:
-    git:
-      url: https://github.com/Saugat913/zren.git
-"#;
+    if content.contains(&format!("{}:", package_name)) {
+        return Ok(());
+    }
 
-    // Insert under `dependencies:` section
-    let updated = content.replace(
-        "dependencies:\n",
-        &format!("dependencies:\n{}", git_dep),
+    let git_dep = format!(
+        "  {}:\n    git:\n      url: {}\n",
+        package_name, git_url
     );
 
-    fs::write(&pubspec_path, updated)?;
+    let marker = "dependencies:\n";
+    let updated = content
+        .find(marker)
+        .map(|pos| {
+            let insert_at = pos + marker.len();
+            let mut s = content.clone();
+            s.insert_str(insert_at, &git_dep);
+            s
+        })
+        .ok_or_else(|| anyhow::anyhow!("Could not find `dependencies:` in pubspec.yaml"))?;
+
+    fs::write(&pubspec_path, updated)
+        .with_context(|| format!("Failed to write {:?}", pubspec_path))?;
+
     Ok(())
 }

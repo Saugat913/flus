@@ -46,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             kVSizedBox6,
-                            BrandLogo(icon: Icons.person_add),
+                            BrandLogo(),
                             kVSizedBox4,
                             Expanded(
                               child: Container(
