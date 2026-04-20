@@ -1,8 +1,8 @@
 use crate::error::Result;
 use crate::generator::{Generator, GeneratorContext};
-use crate::template::{TemplateContext, TemplateEngine, templates};
+use crate::template::{templates, TemplateContext, TemplateEngine, Templates};
 use crate::utils::{
-    ExecuterConfig, FSAction, execute_command, inject_git_dependency, run_with_spinner,
+    execute_command, inject_git_dependency, run_with_spinner, ExecuterConfig, FSAction,
 };
 
 pub struct ProjectScaffolder;
@@ -11,7 +11,7 @@ type DataInjector = Box<dyn Fn(&mut TemplateContext)>;
 impl Generator for ProjectScaffolder {
     fn run(&self, context: &GeneratorContext) -> Result<()> {
         let lib_path = context.base_path.join("lib");
-        let engine = TemplateEngine::new("templates/**/*")?;
+        let engine = TemplateEngine::new()?;
 
         let template_mappings: Vec<(&str, &str, DataInjector)> = vec![
             (
@@ -124,34 +124,21 @@ impl Generator for ProjectScaffolder {
 
         FSAction::remove_file("main.dart").execute(&lib_path)?;
 
-        let template_base = "templates";
-        let predefined_root = format!("{}/{}", template_base, templates::PREDEFINED_FEATURES_DIR);
-        if std::path::Path::new(&predefined_root).exists() {
-            for entry in walkdir::WalkDir::new(&predefined_root)
-                .into_iter()
-                .filter_map(|e| e.ok())
-            {
-                let path = entry.path();
+        let template_base = templates::PREDEFINED_FEATURES_DIR;
+        for path in Templates::iter() {
+            let path_str: &str = path.as_ref();
+            if path_str.starts_with(template_base) && path_str.ends_with(".tera") {
+                let relative = path_str
+                    .strip_prefix(&format!("{}/", template_base))
+                    .unwrap();
+                let mut output_path = std::path::PathBuf::from(relative);
+                output_path.set_extension("");
+                let final_output = format!("features/{}", output_path.display());
 
-                if path.is_file() {
-        
-                    let relative = path.strip_prefix(&predefined_root).unwrap();
-                    let template_key = format!(
-                        "{}/{}",
-                        templates::PREDEFINED_FEATURES_DIR,
-                        relative.display()
-                    );
-
-                    let mut output_path = relative.to_path_buf();
-                    output_path.set_extension(""); 
-                    let final_output = format!("features/{}", output_path.display());
-
-                    let content = engine.render(&template_key, |ctx| {
-                        ctx.insert("project_name", &context.project_name);
-                    })?;
-
-                    FSAction::create_file(&final_output, Some(&content)).execute(&lib_path)?;
-                }
+                let rendered = engine.render(path_str, |ctx| {
+                    ctx.insert("project_name", &context.project_name);
+                })?;
+                FSAction::create_file(&final_output, Some(&rendered)).execute(&lib_path)?;
             }
         }
 

@@ -1,6 +1,11 @@
 use crate::error::Result;
+use rust_embed::RustEmbed;
 use serde::Serialize;
 use tera::{Context, Tera};
+
+#[derive(RustEmbed)]
+#[folder = "templates/"]
+pub struct Templates;
 
 pub mod templates {
     pub const MAKEFILE: &str = "Makefile.tera";
@@ -16,7 +21,7 @@ pub mod templates {
         pub const CONSTANTS: &str = "core/app/constants.dart.tera";
         pub const DI: &str = "core/app/di.dart.tera";
         pub const ENUM: &str = "core/app/enum.dart.tera";
-        
+
         pub const AUTH_NOTIFIER: &str = "core/auth/auth_notifier.dart.tera";
         pub const FLAVOR: &str = "core/config/flavor.dart.tera";
         pub const LOGGER: &str = "core/development/logger.dart.tera";
@@ -38,8 +43,6 @@ pub mod templates {
     pub const PREDEFINED_FEATURES_DIR: &str = "features/predefined";
 }
 
-
-
 pub struct TemplateEngine {
     tera: Tera,
 }
@@ -60,9 +63,16 @@ impl TemplateContext {
     }
 }
 impl TemplateEngine {
-    pub fn new(template_path: &str) -> Result<Self> {
-        let tera = Tera::new(template_path)?;
-        return Ok(Self { tera: tera });
+    pub fn new() -> Result<Self> {
+        let mut tera = Tera::default();
+        for path in Templates::iter() {
+            let path_str = path.as_ref();
+            if let Some(content) = Templates::get(path_str) {
+                let _ =
+                    tera.add_raw_template(path_str, std::str::from_utf8(content.data.as_ref())?);
+            }
+        }
+        Ok(Self { tera })
     }
 
     pub fn render<F>(&self, template_name: &str, context_builder: F) -> Result<String>
