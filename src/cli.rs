@@ -31,7 +31,9 @@ impl Cli {
             CliCommand::Create(command) => {
                 handle_create_command(command)?;
             }
-            CliCommand::Generate => {}
+            CliCommand::Generate => {
+                handle_generate_command();
+            }
         };
         Ok(())
     }
@@ -53,4 +55,8 @@ fn handle_create_command(command: CreateCommand) -> Result<()> {
     })?;
     println!("Created basic folder structure");
     Ok(())
+}
+
+fn handle_generate_command(){
+    println!("Notice: For now generating the features is not supported and is working on it");
 }
