@@ -1,0 +1,345 @@
+import 'package:flutter/material.dart';
+
+class AppTextStyles extends ThemeExtension<AppTextStyles> {
+  const AppTextStyles({
+    required this.displayLarge,
+    required this.displayMedium,
+    required this.displaySmall,
+    required this.headingLarge,
+    required this.headingMedium,
+    required this.headingSmall,
+    required this.titleLarge,
+    required this.titleMedium,
+    required this.subheadingLarge,
+    required this.subheadingMedium,
+    required this.subheadingSmall,
+    required this.tileTitle,
+    required this.tileSubtitle,
+    required this.bodyLarge,
+    required this.bodyMedium,
+    required this.bodySmall,
+    required this.labelLarge,
+    required this.labelMedium,
+    required this.labelSmall,
+    required this.buttonLarge,
+    required this.buttonMedium,
+    required this.buttonSmall,
+    required this.caption,
+    required this.overline,
+    required this.link,
+    required this.code,
+  });
+
+  final TextStyle? displayLarge;
+  final TextStyle? displayMedium;
+  final TextStyle? displaySmall;
+  final TextStyle? headingLarge;
+  final TextStyle? headingMedium;
+  final TextStyle? headingSmall;
+  final TextStyle? titleLarge;
+  final TextStyle? titleMedium;
+  final TextStyle? subheadingLarge;
+  final TextStyle? subheadingMedium;
+  final TextStyle? subheadingSmall;
+  final TextStyle? tileTitle;
+  final TextStyle? tileSubtitle;
+  final TextStyle? bodyLarge;
+  final TextStyle? bodyMedium;
+  final TextStyle? bodySmall;
+  final TextStyle? labelLarge;
+  final TextStyle? labelMedium;
+  final TextStyle? labelSmall;
+  final TextStyle? buttonLarge;
+  final TextStyle? buttonMedium;
+  final TextStyle? buttonSmall;
+  final TextStyle? caption;
+  final TextStyle? overline;
+  final TextStyle? link;
+  final TextStyle? code;
+
+  static const AppTextStyles defaults = AppTextStyles(
+    // Display — hero sections, splash screens
+    displayLarge: TextStyle(
+      fontSize: 57,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.25,
+      height: 1.12,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 45,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 0,
+      height: 1.16,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      height: 1.22,
+    ),
+
+    // Heading — page titles, section headers
+    headingLarge: TextStyle(
+      fontSize: 32,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.5,
+      height: 1.25,
+    ),
+    headingMedium: TextStyle(
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.25,
+      height: 1.29,
+    ),
+    headingSmall: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      height: 1.33,
+    ),
+
+    // Title — card titles, dialog headers
+    titleLarge: TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      height: 1.27,
+    ),
+    titleMedium: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+      height: 1.33,
+    ),
+
+    // Subheading — section sub-titles, card headers
+    subheadingLarge: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      height: 1.4,
+    ),
+    subheadingMedium: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0,
+      height: 1.44,
+    ),
+    subheadingSmall: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+      height: 1.5,
+    ),
+
+    // Tile — list tiles, menu items, row items
+    tileTitle: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.15,
+      height: 1.5,
+    ),
+    tileSubtitle: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.1,
+      height: 1.43,
+    ),
+
+    // Body — paragraph content
+    bodyLarge: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.5,
+      height: 1.5,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.25,
+      height: 1.43,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.4,
+      height: 1.33,
+    ),
+
+    // Label — form labels, tags, chips
+    labelLarge: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+      height: 1.43,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.5,
+      height: 1.33,
+    ),
+    labelSmall: TextStyle(
+      fontSize: 11,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.5,
+      height: 1.45,
+    ),
+
+    // Button — CTA buttons
+    buttonLarge: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+      height: 1.5,
+    ),
+    buttonMedium: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.4,
+      height: 1.43,
+    ),
+    buttonSmall: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.3,
+      height: 1.33,
+    ),
+
+    // Utility
+    caption: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.4,
+      height: 1.33,
+    ),
+    overline: TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.5,
+      height: 1.6,
+    ),
+    link: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+      height: 1.43,
+      decoration: TextDecoration.underline,
+    ),
+    code: TextStyle(
+      fontSize: 13,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+      height: 1.6,
+      fontFamily: 'monospace',
+    ),
+  );
+
+  @override
+  AppTextStyles copyWith({
+    TextStyle? displayLarge,
+    TextStyle? displayMedium,
+    TextStyle? displaySmall,
+    TextStyle? headingLarge,
+    TextStyle? headingMedium,
+    TextStyle? headingSmall,
+    TextStyle? titleLarge,
+    TextStyle? titleMedium,
+    TextStyle? subheadingLarge,
+    TextStyle? subheadingMedium,
+    TextStyle? subheadingSmall,
+    TextStyle? tileTitle,
+    TextStyle? tileSubtitle,
+    TextStyle? bodyLarge,
+    TextStyle? bodyMedium,
+    TextStyle? bodySmall,
+    TextStyle? labelLarge,
+    TextStyle? labelMedium,
+    TextStyle? labelSmall,
+    TextStyle? buttonLarge,
+    TextStyle? buttonMedium,
+    TextStyle? buttonSmall,
+    TextStyle? caption,
+    TextStyle? overline,
+    TextStyle? link,
+    TextStyle? code,
+  }) {
+    return AppTextStyles(
+      displayLarge: displayLarge ?? this.displayLarge,
+      displayMedium: displayMedium ?? this.displayMedium,
+      displaySmall: displaySmall ?? this.displaySmall,
+      headingLarge: headingLarge ?? this.headingLarge,
+      headingMedium: headingMedium ?? this.headingMedium,
+      headingSmall: headingSmall ?? this.headingSmall,
+      titleLarge: titleLarge ?? this.titleLarge,
+      titleMedium: titleMedium ?? this.titleMedium,
+      subheadingLarge: subheadingLarge ?? this.subheadingLarge,
+      subheadingMedium: subheadingMedium ?? this.subheadingMedium,
+      subheadingSmall: subheadingSmall ?? this.subheadingSmall,
+      tileTitle: tileTitle ?? this.tileTitle,
+      tileSubtitle: tileSubtitle ?? this.tileSubtitle,
+      bodyLarge: bodyLarge ?? this.bodyLarge,
+      bodyMedium: bodyMedium ?? this.bodyMedium,
+      bodySmall: bodySmall ?? this.bodySmall,
+      labelLarge: labelLarge ?? this.labelLarge,
+      labelMedium: labelMedium ?? this.labelMedium,
+      labelSmall: labelSmall ?? this.labelSmall,
+      buttonLarge: buttonLarge ?? this.buttonLarge,
+      buttonMedium: buttonMedium ?? this.buttonMedium,
+      buttonSmall: buttonSmall ?? this.buttonSmall,
+      caption: caption ?? this.caption,
+      overline: overline ?? this.overline,
+      link: link ?? this.link,
+      code: code ?? this.code,
+    );
+  }
+
+  @override
+  AppTextStyles lerp(AppTextStyles? other, double t) {
+    if (other is! AppTextStyles) return this;
+    return AppTextStyles(
+      displayLarge: TextStyle.lerp(displayLarge, other.displayLarge, t),
+      displayMedium: TextStyle.lerp(displayMedium, other.displayMedium, t),
+      displaySmall: TextStyle.lerp(displaySmall, other.displaySmall, t),
+      headingLarge: TextStyle.lerp(headingLarge, other.headingLarge, t),
+      headingMedium: TextStyle.lerp(headingMedium, other.headingMedium, t),
+      headingSmall: TextStyle.lerp(headingSmall, other.headingSmall, t),
+      titleLarge: TextStyle.lerp(titleLarge, other.titleLarge, t),
+      titleMedium: TextStyle.lerp(titleMedium, other.titleMedium, t),
+      subheadingLarge: TextStyle.lerp(
+        subheadingLarge,
+        other.subheadingLarge,
+        t,
+      ),
+      subheadingMedium: TextStyle.lerp(
+        subheadingMedium,
+        other.subheadingMedium,
+        t,
+      ),
+      subheadingSmall: TextStyle.lerp(
+        subheadingSmall,
+        other.subheadingSmall,
+        t,
+      ),
+      tileTitle: TextStyle.lerp(tileTitle, other.tileTitle, t),
+      tileSubtitle: TextStyle.lerp(tileSubtitle, other.tileSubtitle, t),
+      bodyLarge: TextStyle.lerp(bodyLarge, other.bodyLarge, t),
+      bodyMedium: TextStyle.lerp(bodyMedium, other.bodyMedium, t),
+      bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t),
+      labelLarge: TextStyle.lerp(labelLarge, other.labelLarge, t),
+      labelMedium: TextStyle.lerp(labelMedium, other.labelMedium, t),
+      labelSmall: TextStyle.lerp(labelSmall, other.labelSmall, t),
+      buttonLarge: TextStyle.lerp(buttonLarge, other.buttonLarge, t),
+      buttonMedium: TextStyle.lerp(buttonMedium, other.buttonMedium, t),
+      buttonSmall: TextStyle.lerp(buttonSmall, other.buttonSmall, t),
+      caption: TextStyle.lerp(caption, other.caption, t),
+      overline: TextStyle.lerp(overline, other.overline, t),
+      link: TextStyle.lerp(link, other.link, t),
+      code: TextStyle.lerp(code, other.code, t),
+    );
+  }
+}
+
+extension AppTextStylesExtension on BuildContext {
+  AppTextStyles get textStyles => Theme.of(this).extension<AppTextStyles>()!;
+}

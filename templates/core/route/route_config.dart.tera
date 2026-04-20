@@ -1,0 +1,15 @@
+class RouteName {
+  static const splash = 'splash';
+  static const login = 'login';
+  static const register = 'register';
+  static const home = 'home';
+}
+
+class RouteConfig {
+  static const splash = '/splash';
+  static const auth = '/auth';
+  static const login = RouteName.login;
+  static const register = RouteName.register;
+  static const root = '/';
+  static const home = '/${RouteName.home}';
+}

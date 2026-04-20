@@ -1,0 +1,5 @@
+class HomeRepository {
+  Future<void> load() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
+}

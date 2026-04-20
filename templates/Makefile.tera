@@ -1,0 +1,44 @@
+APP_DEV_ENTRY  := lib/main_development.dart
+APP_PROD_ENTRY := lib/main_production.dart
+
+.DEFAULT_GOAL := run-dev
+.PHONY: help clean run-dev run-prod build-apk-dev build-apk-prod
+
+help:
+	@echo ""
+	@echo "  Usage: make [target]"
+	@echo ""
+	@echo "  Targets:"
+	@echo "    (default)        run-dev"
+	@echo "    clean            flutter clean + pub get"
+	@echo "    run-dev          run on device (dev)"
+	@echo "    run-prod         run on device (prod)"
+	@echo "    build-apk-dev    debug APK (dev)"
+	@echo "    build-apk-prod   release APK (prod, obfuscated)"
+	@echo ""
+
+clean:
+	flutter clean
+	flutter pub get
+
+run-dev:
+	flutter run \
+		--target $(APP_DEV_ENTRY)
+
+run-prod:
+	flutter run \
+		--target $(APP_PROD_ENTRY) \
+		--release
+
+build-apk-dev:
+	flutter build apk \
+		--debug \
+		--target $(APP_DEV_ENTRY)
+
+build-apk-prod:
+	flutter build apk \
+		--release \
+		--target $(APP_PROD_ENTRY) \
+		--obfuscate \
+		--split-debug-info=build/symbols \
+		--split-per-abi

@@ -1,0 +1,36 @@
+import 'package:zren/zren.dart';
+
+//Base state for the login scree represent the login page state
+sealed class LoginState extends BaseState {
+  const LoginState();
+}
+
+//Base effect for login page it represent the sideeffect of the operation
+sealed class LoginEffect extends BaseEffect {
+  const LoginEffect();
+}
+
+final class LoginIdle extends LoginState {
+  const LoginIdle();
+  @override
+  List<Object?> get props => [];
+}
+
+final class LoginLoading extends LoginState {
+  const LoginLoading();
+  @override
+  List<Object?> get props => [];
+}
+
+final class NavigateToHome extends LoginEffect {
+  const NavigateToHome();
+}
+
+final class NavigateToRegister extends LoginEffect {
+  const NavigateToRegister();
+}
+
+final class ShowError extends LoginEffect {
+  final String message;
+  const ShowError(this.message);
+}

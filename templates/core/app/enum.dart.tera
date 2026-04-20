@@ -1,0 +1,4 @@
+enum LogType { info, error, warning }
+enum FlavorType { dev, prod }
+enum AuthStatus { uninitialized, authenticated, unauthenticated }
+

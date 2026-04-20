@@ -1,0 +1,11 @@
+import '../model/login_request_model.dart';
+
+class LoginRepository {
+  Future<bool> login(LoginRequestModel request) async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (request.email.isNotEmpty && request.password.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+}

@@ -1,0 +1,28 @@
+import 'package:zren/zren.dart';
+
+sealed class HomeState extends BaseState {
+  const HomeState();
+}
+
+sealed class HomeEffect extends BaseEffect {
+  const HomeEffect();
+}
+
+final class HomeIdle extends HomeState {
+  const HomeIdle();
+  @override
+  List<Object?> get props => [];
+}
+
+final class HomeLoading extends HomeState {
+  const HomeLoading();
+  @override
+  List<Object?> get props => [];
+}
+
+final class ShowHomeError extends HomeEffect {
+  final String message;
+  const ShowHomeError(this.message);
+  @override
+  List<Object?> get props => [message];
+}

@@ -1,0 +1,6 @@
+import 'package:{{project_name}}/core/config/flavor.dart';
+import 'package:{{project_name}}/main_common.dart';
+
+void main() {
+  mainCommon(Flavor.dev());
+}

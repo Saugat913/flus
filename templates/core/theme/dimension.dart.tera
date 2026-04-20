@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+const kHBox0 = 4.0;
+const kHBox1 = 8.0;
+const kHBox2 = 16.0;
+const kHBox3 = 24.0;
+const kHBox4 = 32.0;
+const kHBox5 = 40.0;
+const kHBox6 = 48.0;
+const kHBox7 = 64.0;
+
+const kVBox0 = 4.0;
+const kVBox1 = 8.0;
+const kVBox2 = 16.0;
+const kVBox3 = 24.0;
+const kVBox4 = 32.0;
+const kVBox5 = 40.0;
+const kVBox6 = 48.0;
+const kVBox7 = 64.0;
+
+const kPadding4 = 4.0;
+const kPadding6 = 6.0;
+const kPadding8 = 8.0;
+const kPadding10 = 10.0;
+const kPadding12 = 12.0;
+const kPadding16 = 16.0;
+const kPadding20 = 20.0;
+const kPadding24 = 24.0;
+const kPadding32 = 32.0;
+const kPadding48 = 48.0;
+const kPadding64 = 64.0;
+
+const kRadius4 = 4.0; // chips, tags
+const kRadius8 = 8.0; // buttons, inputs
+const kRadius12 = 12.0; // cards, sheets
+const kRadius16 = 16.0; // bottom sheets, dialogs
+const kRadius20 = 20.0;
+const kRadius24 = 24.0; // large cards
+const kRadius32 = 32.0; // pill buttons
+const kRadiusFull = 999.0; // fully rounded / circle
+
+const kHSizedBox0 = SizedBox(width: kHBox0);
+const kHSizedBox1 = SizedBox(width: kHBox1);
+const kHSizedBox2 = SizedBox(width: kHBox2);
+const kHSizedBox3 = SizedBox(width: kHBox3);
+const kHSizedBox4 = SizedBox(width: kHBox4);
+const kHSizedBox5 = SizedBox(width: kHBox5);
+const kHSizedBox6 = SizedBox(width: kHBox6);
+const kHSizedBox7 = SizedBox(width: kHBox7);
+
+const kVSizedBox0 = SizedBox(height: kVBox0);
+const kVSizedBox1 = SizedBox(height: kVBox1);
+const kVSizedBox2 = SizedBox(height: kVBox2);
+const kVSizedBox3 = SizedBox(height: kVBox3);
+const kVSizedBox4 = SizedBox(height: kVBox4);
+const kVSizedBox5 = SizedBox(height: kVBox5);
+const kVSizedBox6 = SizedBox(height: kVBox6);
+const kVSizedBox7 = SizedBox(height: kVBox7);

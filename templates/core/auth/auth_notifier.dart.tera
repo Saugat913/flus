@@ -1,0 +1,17 @@
+import 'package:flutter/foundation.dart';
+import 'package:{{project_name}}/core/app/enum.dart';
+
+class AuthNotifier extends ChangeNotifier {
+  AuthStatus authStatus;
+  AuthNotifier({required this.authStatus});
+
+  void login() {
+    authStatus = AuthStatus.authenticated;
+    notifyListeners();
+  }
+
+  void logout() {
+    authStatus = AuthStatus.unauthenticated;
+    notifyListeners();
+  }
+}

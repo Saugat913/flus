@@ -1,0 +1,24 @@
+import 'package:flutter/foundation.dart';
+import 'package:{{project_name}}/core/app/enum.dart';
+
+void consolelog(String msg, {StackTrace? st, LogType type = LogType.info}) {
+  const reset = '\x1B[0m';
+  final colorCode = switch (type) {
+    LogType.error => '\x1B[31m',
+    LogType.info => '\x1B[34m',
+    LogType.warning => '\x1B[33m',
+  };
+
+  final icon = switch (type) {
+    LogType.error => '[ERROR]',
+    LogType.info => '[INFO]',
+    LogType.warning => '[WARNING]',
+  };
+
+  if (kDebugMode) {
+    debugPrint('$colorCode[$icon] $msg$reset');
+    if (st != null) {
+      debugPrint('$colorCode$st$reset');
+    }
+  }
+}

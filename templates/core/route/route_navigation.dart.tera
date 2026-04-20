@@ -1,0 +1,54 @@
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+
+dynamic back(BuildContext context, [dynamic result]) {
+  GoRouter.of(context).pop(result);
+}
+
+//! Route to another page on top of current route
+dynamic navigatePushNamed(
+  BuildContext context,
+  String routeName, {
+  params = const <String, String>{},
+  queryParams = const <String, dynamic>{},
+  dynamic extra,
+}) {
+  GoRouter.of(context).pushNamed(
+    routeName,
+    pathParameters: params,
+    queryParameters: queryParams,
+    extra: extra,
+  );
+}
+
+//! Route to another route replacing the current route
+dynamic navigatePushReplacementNamed(
+  BuildContext context,
+  String routeName, {
+  params = const <String, String>{},
+  queryParams = const <String, dynamic>{},
+  dynamic extra,
+}) {
+  GoRouter.of(context).pushReplacementNamed(
+    routeName,
+    pathParameters: params,
+    queryParameters: queryParams,
+    extra: extra,
+  );
+}
+
+// ! Removes all the previous routes
+dynamic navigateGoNamed(
+  BuildContext context,
+  String routeName, {
+  params = const <String, String>{},
+  queryParams = const <String, dynamic>{},
+  dynamic extra,
+}) {
+  GoRouter.of(context).goNamed(
+    routeName,
+    pathParameters: params,
+    queryParameters: queryParams,
+    extra: extra,
+  );
+}

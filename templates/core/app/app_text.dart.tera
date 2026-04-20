@@ -1,0 +1,18 @@
+/// The textual data string all goes here
+/// like
+/// static const welcome = 'welcome';
+/// why ? for custom localiztion approach
+class AppText {
+  static const appName = "{{project_name}}";
+  static const loginMsg = "Login into your account";
+  static const loginLabel = "Fillout the information below to continue";
+  static const noAccountMsg = "Don't have an account ? ";
+  static const registerMsg = "Getting Started";
+  static const registerLabel =
+      "Enter your information below to create an account";
+  static const agreementDisclaimer =
+      "By signing up you agree to our Privacy Policy and Terms and conditions";
+  static const existingAccountMsg = "Already a user?";
+
+  static const homeScreenMsg = "Welcome User";
+}

@@ -1,0 +1,18 @@
+import 'package:zren/zren.dart';
+import 'package:{{project_name}}/features/home/data/repository/home_repository.dart';
+import 'home_state.dart';
+
+final class HomeController extends ZrenController<HomeState, HomeEffect> {
+  final HomeRepository _homeRepository;
+
+  HomeController({HomeRepository? homeRepository})
+      : _homeRepository = homeRepository ?? HomeRepository(),
+        super(const HomeIdle());
+
+  void init() {
+    emit(const HomeLoading());
+    _homeRepository.load().then((_) {
+      emit(const HomeIdle());
+    });
+  }
+}

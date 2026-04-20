@@ -1,0 +1,14 @@
+import 'package:get_it/get_it.dart';
+import 'package:{{project_name}}/core/app/enum.dart';
+import 'package:{{project_name}}/core/auth/auth_notifier.dart';
+
+final getIt = GetIt.instance;
+
+/// Initialize the DI first at app start up then only access the value
+void initializeDI() {
+  getIt.registerLazySingleton<AuthNotifier>(
+    () => AuthNotifier(authStatus: AuthStatus.uninitialized),
+  );
+}
+
+AuthNotifier get authStateNotifier => getIt.get<AuthNotifier>();

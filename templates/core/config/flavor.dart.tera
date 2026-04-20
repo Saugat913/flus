@@ -1,0 +1,18 @@
+import 'package:{{project_name}}/core/app/enum.dart';
+
+class Flavor {
+  static Flavor dev() {
+    _instance = Flavor._(FlavorType.dev);
+    return instance;
+  }
+
+  static Flavor prod() {
+    _instance = Flavor._(FlavorType.prod);
+    return instance;
+  }
+
+  Flavor._(this.flavorType);
+  static late Flavor _instance;
+  static Flavor get instance => _instance;
+  final FlavorType flavorType;
+}

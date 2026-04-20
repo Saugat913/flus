@@ -1,0 +1,75 @@
+import 'package:go_router/go_router.dart';
+import 'package:{{project_name}}/core/app/di.dart';
+import 'package:{{project_name}}/core/app/enum.dart';
+import 'package:{{project_name}}/core/route/not_found_screen.dart';
+import 'package:{{project_name}}/core/route/route_config.dart';
+import 'package:{{project_name}}/features/auth/presentation/login/screen/login_screen.dart';
+import 'package:{{project_name}}/features/auth/presentation/register/screen/register_screen.dart';
+import 'package:{{project_name}}/features/home/presentation/screen/home.dart';
+import 'package:{{project_name}}/features/main/presentation/screen/main.dart';
+import 'package:{{project_name}}/features/splash/presentation/screen/splash_screen.dart';
+
+final router = GoRouter(
+  initialLocation: RouteConfig.splash,
+  refreshListenable: authStateNotifier,
+  routes: [
+    GoRoute(
+      path: RouteConfig.splash,
+      name: RouteName.splash,
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: RouteConfig.auth,
+      builder: (context, state) => const NotFoundScreen(),
+      routes: [
+        GoRoute(
+          path: RouteConfig.login,
+          name: RouteName.login,
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: RouteConfig.register,
+          name: RouteName.register,
+          builder: (context, state) => const RegisterScreen(),
+        ),
+      ],
+    ),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return MainScreen(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: RouteConfig.home,
+              name: RouteName.home,
+              builder: (context, state) => const HomeScreen(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+  redirect: (context, state) {
+    final authState = authStateNotifier.authStatus;
+    final currentRoute = state.matchedLocation;
+    final isOnAuth = currentRoute.startsWith(RouteConfig.auth);
+    final isOnSplash = RouteConfig.splash == currentRoute;
+
+    if (authState == AuthStatus.uninitialized) {
+      return isOnSplash ? null : state.namedLocation(RouteName.splash);
+    }
+
+    if (authState == AuthStatus.unauthenticated) {
+      return isOnAuth ? null : state.namedLocation(RouteName.login);
+    }
+
+    if (authState == AuthStatus.authenticated) {
+      if (isOnAuth || isOnSplash) {
+        return state.namedLocation(RouteName.home);
+      }
+    }
+    return null;
+  },
+);

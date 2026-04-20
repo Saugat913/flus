@@ -1,0 +1,42 @@
+import 'package:zren/zren.dart';
+
+sealed class RegisterState extends BaseState {
+  const RegisterState();
+}
+
+final class RegisterIdle extends RegisterState {
+  const RegisterIdle();
+
+  @override
+  List<Object?> get props => [];
+}
+
+final class RegisterLoading extends RegisterState {
+  const RegisterLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+
+sealed class RegisterEffect extends BaseEffect {
+  const RegisterEffect();
+}
+
+final class NavigateToHome extends RegisterEffect {
+  const NavigateToHome();
+  @override
+  List<Object?> get props => [];
+}
+
+final class NavigateToLogin extends RegisterEffect {
+  const NavigateToLogin();
+  @override
+  List<Object?> get props => [];
+}
+
+final class ShowError extends RegisterEffect {
+  final String message;
+  const ShowError(this.message);
+  @override
+  List<Object?> get props => [message];
+}

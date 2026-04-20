@@ -1,0 +1,194 @@
+import 'package:flutter/material.dart';
+
+class AppColors extends ThemeExtension<AppColors> {
+  const AppColors({
+    required this.brandColor,
+    required this.danger,
+    required this.cardColor,
+    required this.background,
+    required this.surface,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.textHint,
+    required this.success,
+    required this.warning,
+    required this.info,
+    required this.divider,
+    required this.shadow,
+    required this.inputFill,
+    required this.inputBorder,
+    required this.buttonText,
+    required this.iconPrimary,
+    required this.iconSecondary,
+    required this.overlay,
+    required this.shimmerBase,
+    required this.shimmerHighlight,
+  });
+
+  final Color? brandColor;
+  final Color? danger;
+  final Color? cardColor;
+  final Color? background;
+  final Color? surface;
+  final Color? textPrimary;
+  final Color? textSecondary;
+  final Color? textHint;
+  final Color? success;
+  final Color? warning;
+  final Color? info;
+  final Color? divider;
+  final Color? shadow;
+  final Color? inputFill;
+  final Color? inputBorder;
+  final Color? buttonText;
+  final Color? iconPrimary;
+  final Color? iconSecondary;
+  final Color? overlay;
+  final Color? shimmerBase;
+  final Color? shimmerHighlight;
+
+  static const AppColors light = AppColors(
+    brandColor: Color(0xFF4F46E5), // Indigo
+    danger: Color(0xFFEF4444), // Red
+    cardColor: Color(0xFFFFFFFF), // White
+    background: Color(0xFFF9FAFB), // Near white
+    surface: Color(0xFFFFFFFF), // White
+    textPrimary: Color(0xFF111827), // Gray 900
+    textSecondary: Color(0xFF6B7280), // Gray 500
+    textHint: Color(0xFF9CA3AF), // Gray 400
+    success: Color(0xFF22C55E), // Green
+    warning: Color(0xFFF59E0B), // Amber
+    info: Color(0xFF3B82F6), // Blue
+    divider: Color(0xFFE5E7EB), // Gray 200
+    shadow: Color(0x1A000000), // Black 10%
+    inputFill: Color(0xFFF3F4F6), // Gray 100
+    inputBorder: Color(0xFFD1D5DB), // Gray 300
+    buttonText: Color(0xFFFFFFFF), // White
+    iconPrimary: Color(0xFF111827), // Gray 900
+    iconSecondary: Color(0xFF6B7280), // Gray 500
+    overlay: Color(0x80000000), // Black 50%
+    shimmerBase: Color(0xFFE5E7EB), // Gray 200
+    shimmerHighlight: Color(0xFFF9FAFB), // Gray 50
+  );
+
+  static const AppColors dark = AppColors(
+    brandColor: Color(0xFF818CF8), // Indigo 400
+    danger: Color(0xFFF87171), // Red 400
+    cardColor: Color(0xFF1F2937), // Gray 800
+    background: Color(0xFF111827), // Gray 900
+    surface: Color(0xFF1F2937), // Gray 800
+    textPrimary: Color(0xFFF9FAFB), // Gray 50
+    textSecondary: Color(0xFF9CA3AF), // Gray 400
+    textHint: Color(0xFF6B7280), // Gray 500
+    success: Color(0xFF4ADE80), // Green 400
+    warning: Color(0xFFFBBF24), // Amber 400
+    info: Color(0xFF60A5FA), // Blue 400
+    divider: Color(0xFF374151), // Gray 700
+    shadow: Color(0x33000000), // Black 20%
+    inputFill: Color(0xFF374151), // Gray 700
+    inputBorder: Color(0xFF4B5563), // Gray 600
+    buttonText: Color(0xFFFFFFFF), // White
+    iconPrimary: Color(0xFFF9FAFB), // Gray 50
+    iconSecondary: Color(0xFF9CA3AF), // Gray 400
+    overlay: Color(0x99000000), // Black 60%
+    shimmerBase: Color(0xFF374151), // Gray 700
+    shimmerHighlight: Color(0xFF4B5563), // Gray 600
+  );
+
+  @override
+  AppColors copyWith({
+    Color? brandColor,
+    Color? danger,
+    Color? cardColor,
+    Color? background,
+    Color? surface,
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textHint,
+    Color? success,
+    Color? warning,
+    Color? info,
+    Color? divider,
+    Color? shadow,
+    Color? inputFill,
+    Color? inputBorder,
+    Color? buttonText,
+    Color? iconPrimary,
+    Color? iconSecondary,
+    Color? overlay,
+    Color? shimmerBase,
+    Color? shimmerHighlight,
+  }) {
+    return AppColors(
+      brandColor: brandColor ?? this.brandColor,
+      danger: danger ?? this.danger,
+      cardColor: cardColor ?? this.cardColor,
+      background: background ?? this.background,
+      surface: surface ?? this.surface,
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
+      textHint: textHint ?? this.textHint,
+      success: success ?? this.success,
+      warning: warning ?? this.warning,
+      info: info ?? this.info,
+      divider: divider ?? this.divider,
+      shadow: shadow ?? this.shadow,
+      inputFill: inputFill ?? this.inputFill,
+      inputBorder: inputBorder ?? this.inputBorder,
+      buttonText: buttonText ?? this.buttonText,
+      iconPrimary: iconPrimary ?? this.iconPrimary,
+      iconSecondary: iconSecondary ?? this.iconSecondary,
+      overlay: overlay ?? this.overlay,
+      shimmerBase: shimmerBase ?? this.shimmerBase,
+      shimmerHighlight: shimmerHighlight ?? this.shimmerHighlight,
+    );
+  }
+
+  @override
+  AppColors lerp(AppColors? other, double t) {
+    if (other is! AppColors) return this;
+    return AppColors(
+      brandColor: Color.lerp(brandColor, other.brandColor, t),
+      danger: Color.lerp(danger, other.danger, t),
+      cardColor: Color.lerp(cardColor, other.cardColor, t),
+      background: Color.lerp(background, other.background, t),
+      surface: Color.lerp(surface, other.surface, t),
+      textPrimary: Color.lerp(textPrimary, other.textPrimary, t),
+      textSecondary: Color.lerp(textSecondary, other.textSecondary, t),
+      textHint: Color.lerp(textHint, other.textHint, t),
+      success: Color.lerp(success, other.success, t),
+      warning: Color.lerp(warning, other.warning, t),
+      info: Color.lerp(info, other.info, t),
+      divider: Color.lerp(divider, other.divider, t),
+      shadow: Color.lerp(shadow, other.shadow, t),
+      inputFill: Color.lerp(inputFill, other.inputFill, t),
+      inputBorder: Color.lerp(inputBorder, other.inputBorder, t),
+      buttonText: Color.lerp(buttonText, other.buttonText, t),
+      iconPrimary: Color.lerp(iconPrimary, other.iconPrimary, t),
+      iconSecondary: Color.lerp(iconSecondary, other.iconSecondary, t),
+      overlay: Color.lerp(overlay, other.overlay, t),
+      shimmerBase: Color.lerp(shimmerBase, other.shimmerBase, t),
+      shimmerHighlight: Color.lerp(shimmerHighlight, other.shimmerHighlight, t),
+    );
+  }
+
+  @override
+  String toString() =>
+      'AppColors('
+      'brandColor: $brandColor, '
+      'danger: $danger, '
+      'cardColor: $cardColor, '
+      'background: $background, '
+      'surface: $surface, '
+      'textPrimary: $textPrimary, '
+      'textSecondary: $textSecondary, '
+      'success: $success, '
+      'warning: $warning, '
+      'info: $info'
+      ')';
+}
+
+extension AppColorsExtension on BuildContext {
+  AppColors get colors =>
+      Theme.of(this).extension<AppColors>() ?? AppColors.light;
+}

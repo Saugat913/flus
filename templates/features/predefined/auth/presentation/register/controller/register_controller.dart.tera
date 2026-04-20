@@ -1,0 +1,76 @@
+import 'package:{{project_name}}/core/development/logger.dart';
+import 'package:zren/zren.dart';
+import 'package:{{project_name}}/features/auth/data/model/register_request_model.dart';
+import 'package:{{project_name}}/features/auth/data/repository/register_repository.dart';
+import 'register_state.dart';
+
+final class RegisterFields {
+  static const name = FormFieldKey<String>('name');
+  static const email = FormFieldKey<String>('email');
+  static const password = FormFieldKey<String>('password');
+}
+
+final class RegisterController
+    extends ZrenController<RegisterState, RegisterEffect> {
+  final RegisterRepository _registerRepository;
+  final formController = FormController();
+
+  RegisterController({RegisterRepository? registerRepository})
+    : _registerRepository = registerRepository ?? RegisterRepository(),
+      super(RegisterIdle()) {
+    formController.register(
+      RegisterFields.name,
+      '',
+      validators: [Validators.required()],
+    );
+    formController.register(
+      RegisterFields.email,
+      '',
+      validators: [Validators.required(), Validators.email()],
+    );
+    formController.register(
+      RegisterFields.password,
+      '',
+      validators: [Validators.required(), Validators.minLength(6)],
+    );
+  }
+
+  Future<void> register() async {
+    consolelog(formController.toString());
+    if (!formController.validate()) {
+      consolelog("Error");
+      return;
+    }
+    emit(RegisterLoading());
+    final name = formController.getValue(RegisterFields.name);
+    final email = formController.getValue(RegisterFields.email);
+    final password = formController.getValue(RegisterFields.password);
+
+    final request = RegisterRequestModel(
+      name: name,
+      email: email,
+      password: password,
+    );
+
+    try {
+      final success = await _registerRepository.register(request);
+
+      if (success) {
+        emit(RegisterIdle());
+        emitEffect(const NavigateToHome());
+      } else {
+        emit(RegisterIdle());
+        emitEffect(const ShowError('Registration failed. Please try again.'));
+      }
+    } catch (e) {
+      emit(RegisterIdle());
+      emitEffect(const ShowError('An error occurred. Please try again.'));
+    }
+  }
+
+  @override
+  void dispose() {
+    formController.dispose();
+    super.dispose();
+  }
+}

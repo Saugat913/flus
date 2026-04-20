@@ -1,0 +1,70 @@
+import 'package:zren/zren.dart';
+import 'package:{{project_name}}/features/auth/data/model/login_request_model.dart';
+import 'package:{{project_name}}/features/auth/data/repository/login_repository.dart';
+import 'login_state.dart';
+
+final class LoginFields {
+  static const email = FormFieldKey<String>('email');
+  static const password = FormFieldKey<String>('password');
+}
+
+final class LoginController extends ZrenController<LoginState, LoginEffect> {
+  final LoginRepository _loginRepository;
+  final formController = FormController();
+
+  LoginController({LoginRepository? loginRepository})
+    : _loginRepository = loginRepository ?? LoginRepository(),
+      super(LoginIdle()) {
+    formController.register(
+      LoginFields.email,
+      '',
+      validators: [Validators.required(), Validators.email()],
+    );
+    formController.register(
+      LoginFields.password,
+      '',
+      validators: [Validators.required()],
+    );
+  }
+
+  void setEmail(String value) {
+    formController.setValue(LoginFields.email, value);
+  }
+
+  void setPassword(String value) {
+    formController.setValue(LoginFields.password, value);
+  }
+
+  Future<void> login() async {
+    if (!formController.validate()) {
+      return;
+    }
+    emit(LoginLoading());
+    final email = formController.getValue(LoginFields.email);
+    final password = formController.getValue(LoginFields.password);
+    final request = LoginRequestModel(email: email, password: password);
+    try {
+      final success = await _loginRepository.login(request);
+      if (success) {
+        emit(LoginIdle());
+        emitEffect(const NavigateToHome());
+      } else {
+        emit(LoginIdle());
+        emitEffect(const ShowError('Invalid email or password'));
+      }
+    } catch (e) {
+      emit(LoginIdle());
+      emitEffect(const ShowError('An error occurred. Please try again.'));
+    }
+  }
+
+  void navigateToRegister() {
+    emitEffect(const NavigateToRegister());
+  }
+
+  @override
+  void dispose() {
+    formController.dispose();
+    super.dispose();
+  }
+}
